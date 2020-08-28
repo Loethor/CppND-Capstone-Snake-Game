@@ -6,7 +6,9 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)) {
+      random_h(0, static_cast<int>(grid_height)),
+      width(grid_width),
+      height(grid_height) {
   PlaceFood();
 }
 
@@ -23,7 +25,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   while (running) {
 
     if(reset){
-      Reset(reset)
+      Reset(reset);
     }
 
     frame_start = SDL_GetTicks();
@@ -89,14 +91,19 @@ void Game::Update() {
   }
 }
 
-void Game::Reset(&reset){
-  snake.head_x = grid_width / 2;
-  snake.head_y = grid_height / 2;
+void Game::Reset(bool &reset){
+  snake.head_x = this->width / 2;
+  snake.head_y = this->height / 2;
   snake.direction = Snake::Direction::kUp;
   snake.speed = 0.1f;
-  for (int it = snake.body.begin(); it != snake.body.end(); ++it){
-    snake.body.erase(snake.body[it]);
+  snake.size = 0;
+  score = 0;
+  
+  while(snake.body.size() > 0){
+    snake.body.erase(snake.body.begin());
   }
+
+
   PlaceFood();
   reset = false;
 }

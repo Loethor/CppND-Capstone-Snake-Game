@@ -15,6 +15,8 @@ class Game {
   int GetScore() const;
   int GetSize() const;
   void Reset(bool &reset);
+  std::size_t width;
+  std::size_t height;
 
  private:
   Snake snake;
