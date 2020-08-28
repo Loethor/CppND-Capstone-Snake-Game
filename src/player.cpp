@@ -14,14 +14,17 @@ Player::Player(string name, int score){
 }
 
 string Player::GetName(){
+    // Obtains the name
     return name;
 }
 
 int Player::GetScore(){
+    // Obtains the score
     return score;
 }
 
 void Player::SetName(){
+    // the name can be set as a string
     string name;
     std::cout<<"Your player name is:  ";
     std::cin >> name;
@@ -29,6 +32,7 @@ void Player::SetName(){
 }
 
 void Player::SetScore(int score){
+    // the score can be set as an int
     this->score = score;
 }
 
