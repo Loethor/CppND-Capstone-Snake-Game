@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,9 +20,11 @@ public:
 
     // setters
     void SetName();
-    void SetScore();
+    void SetScore(int score);
 
 private:
     string name;
     int score;
 };
+
+#endif

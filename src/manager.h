@@ -1,23 +1,29 @@
+#ifndef MANAGER_H
+#define MANAGER_H
+
 #include <iostream>
-#include "player.h"
 #include <vector>
 #include <fstream>
+#include <string>
 
 using std::vector;
+using std::string;
 
 class Manager{
 
 public:
     Manager()
     {
-        std::cout << " " << std::endl;
+        std::cout << "" << std::endl;
+        should_quit_game = false;
     };
+    ~Manager(){};
 
     bool Init();
-    static bool should_quit_game;
+    bool should_quit_game;
     void ShowHighScores();
     void SaveHighScores(string name, int score);
 
-private:
-    Player *player;
 };
+
+#endif

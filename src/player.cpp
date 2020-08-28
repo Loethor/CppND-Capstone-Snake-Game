@@ -28,10 +28,7 @@ void Player::SetName(){
     this->name = name;
 }
 
-void Player::SetScore(){
-    int score;
-    std::cout<< "Your score is:  ";
-    std::cin >> score;
+void Player::SetScore(int score){
     this->score = score;
 }
 

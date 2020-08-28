@@ -3,6 +3,7 @@
 #include "game.h"
 #include "manager.h"
 #include "renderer.h"
+#include "player.h"
 
 int main() {
   constexpr std::size_t kFramesPerSecond{60};
@@ -26,20 +27,31 @@ int main() {
 
       start = manager.Init();
     }
-
+    start = false;
 
     Player *p1 = new Player();
-    p1->SetName();
+
     Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
     Controller controller;
     Game game(kGridWidth, kGridHeight);
     game.Run(controller, renderer, kMsPerFrame);
 
+    p1->SetName();
 
+    std::cout <<  "\n";
     std::cout << "Game has terminated successfully!\n";
     std::cout << "Score: " << game.GetScore() << "\n";
     std::cout << "Size: " << game.GetSize() << "\n";
-    manager.SaveHighScores(p1->GetName(), game.GetScore())
+    std::cout << "" << "\n";
+    p1->SetScore(game.GetScore());
+
+    std::cout << "Your score has been saved."<< "\n";
+    manager.SaveHighScores(p1->GetName(), p1->GetScore());
+
+    std::cout <<  "\n";
+    std::cout << "Wanna play again?"<< "\n";
+
+    delete p1;
 
   }
 

@@ -2,22 +2,18 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-// #include <dirent.h>
-// #include <unistd.h>
-// #include <sstream>
-// #include <algorithm>
-// #include <bits/stdc++.h>
-// #include <functional>
-// #include <set>
+#include <string>
 
-bool Manager::should_quit_game = false;
+
+
+using std::string;
 
 bool Manager::Init()
 {
 
-    std::cout << " SNAKE game is starting!" << std::endl;
-    std::cout << "" << std::endl;
-    std::cout << "Choose an option: ";
+    std::cout << " Welcome to SNAKE game" << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "Choose an option: "<< std::endl;
     std::cout << " 1.- New Game" << std::endl;
     std::cout << " 2.- High Scores" << std::endl;
     std::cout << " 3.- Quit" << std::endl;
@@ -47,6 +43,8 @@ bool Manager::Init()
         // game starts
         case 1:
         {
+            std::cout << "Starting the game!" << std::endl;
+
             return true;
         };
         break;
@@ -54,8 +52,12 @@ bool Manager::Init()
         //shows high score
         case 2:
         {
+            std::cout << "These are the current highscores:" << std::endl;
+            std::cout << "" << std::endl;
             //show highscores
             ShowHighScores();
+            std::cout << "" << std::endl;
+            std::cout << "" << std::endl;
             return false;
         };
         break;
@@ -73,19 +75,19 @@ bool Manager::Init()
 
 void Manager::ShowHighScores(){
     string line;
-    ifstream myfile ("../data/highscore.txt");
+    std::ifstream myfile ("../data/highscore.txt");
     if (myfile.is_open()){
         while (getline(myfile, line)){
-            cout << line << '\n';
+            std::cout << line << '\n';
         }
         myfile.close();
     }
-    else cout << "Unable to open file"; 
+    else std::cout << "Unable to open file"; 
 
 }
 
-void SaveHighScores(string name, int score){
-    ofstream myfile;
+void Manager::SaveHighScores(string name, int score){
+    std::ofstream myfile;
     myfile.open ("../data/highscore.txt", std::ios_base::app);
     myfile << name << "\t" << score << "\n";
     myfile.close();
