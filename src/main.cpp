@@ -14,10 +14,10 @@ int main() {
 
   bool start = false;
 
+  Manager manager;
   while(true){
 
     while(!start){
-      Manager manager;
       
       if(manager.should_quit_game){
         //exits program
