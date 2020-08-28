@@ -39,7 +39,7 @@ int main() {
     std::cout << "Game has terminated successfully!\n";
     std::cout << "Score: " << game.GetScore() << "\n";
     std::cout << "Size: " << game.GetSize() << "\n";
-    manager.SaveHighScores(p1->GetName, game.GetScore)
+    manager.SaveHighScores(p1->GetName(), game.GetScore())
 
   }
 
