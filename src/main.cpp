@@ -1,6 +1,7 @@
 #include <iostream>
 #include "controller.h"
 #include "game.h"
+#include "manager.h"
 #include "renderer.h"
 
 int main() {
@@ -11,12 +12,37 @@ int main() {
   constexpr std::size_t kGridWidth{32};
   constexpr std::size_t kGridHeight{32};
 
-  Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Controller controller;
-  Game game(kGridWidth, kGridHeight);
-  game.Run(controller, renderer, kMsPerFrame);
-  std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+  bool start = false;
+
+  while(true){
+
+    while(!start){
+      Manager manager;
+      
+      if(manager.should_quit_game){
+        //exits program
+        return 0;
+      }
+
+      start = manager.Init();
+    }
+
+
+    Player *p1 = new Player();
+    p1->SetName();
+    Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+    Controller controller;
+    Game game(kGridWidth, kGridHeight);
+    game.Run(controller, renderer, kMsPerFrame);
+
+
+    std::cout << "Game has terminated successfully!\n";
+    std::cout << "Score: " << game.GetScore() << "\n";
+    std::cout << "Size: " << game.GetSize() << "\n";
+    manager.SaveHighScores(p1->GetName, game.GetScore)
+
+  }
+
+
   return 0;
 }
