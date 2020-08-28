@@ -9,7 +9,7 @@ void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
   return;
 }
 
-void Controller::HandleInput(bool &running, Snake &snake) const {
+void Controller::HandleInput(bool &running, Snake &snake, bool &reset) const {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
@@ -38,6 +38,10 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
         case SDLK_ESCAPE:
           std::cout << "Quitting the game. Good bye!" << std::endl;
           running = false;
+          break;
+        case SDLK_r:
+          reset = true;
+          break;
 
       }
     }

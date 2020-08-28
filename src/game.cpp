@@ -18,12 +18,18 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
+  bool reset = false;
 
   while (running) {
+
+    if(reset){
+      Reset(reset)
+    }
+
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, snake);
+    controller.HandleInput(running, snake, reset);
     Update();
     renderer.Render(snake, food);
 
@@ -81,6 +87,18 @@ void Game::Update() {
     snake.GrowBody();
     snake.speed += 0.02;
   }
+}
+
+void Game::Reset(&reset){
+  snake.head_x = grid_width / 2;
+  snake.head_y = grid_height / 2;
+  snake.direction = Snake::Direction::kUp;
+  snake.speed = 0.1f;
+  for (int it = snake.body.begin(); it != snake.body.end(); ++it){
+    snake.body.erase(snake.body[it]);
+  }
+  PlaceFood();
+  reset = false;
 }
 
 int Game::GetScore() const { return score; }
